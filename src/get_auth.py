@@ -53,8 +53,9 @@ def save2marc(fh: str, record: Record) -> None:
         marcfile.write(record.as_marc())
 
 
-def run(fh_in: str, fh_out: str) -> None:
+def run(fh_in: str, fh_out: str, user: str) -> None:
     with requests.Session() as session:
+        session.headers.update({"User-Agent": f"{user}"})
         for controlNo in controlNos(fh_in):
             response = make_request(session, controlNo)
             record = xml2marc(response.content)
@@ -64,4 +65,5 @@ def run(fh_in: str, fh_out: str) -> None:
 if __name__ == "__main__":
     fh_in = "LCSHcontrolNos.csv"
     fh_out = "LCauths.mrc"
-    run(fh_in, fh_out)
+    user = ""  # enter here your email
+    run(fh_in, fh_out, user)
