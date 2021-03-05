@@ -9,7 +9,7 @@ from io import BytesIO
 from typing import Iterator
 
 import requests
-from pymarc import MARCWriter, Record, XmlHandler, parse_xml
+from pymarc import Record, XmlHandler, parse_xml
 
 
 class AuthHandler(XmlHandler):
@@ -32,7 +32,7 @@ def controlNos(fh: str) -> Iterator[str]:
             yield row[0].replace(" ", "")
 
 
-def make_request(session, controlNo):
+def make_request(session: requests.Session, controlNo: str) -> requests.Response:
     url = f"https://id.loc.gov/authorities/subjects/{controlNo}.marcxml.xml"
     response = session.get(url)
     print(f"{response.request.url} = {response.status_code}")
