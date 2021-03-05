@@ -29,6 +29,7 @@ def controlNos(fh: str) -> Iterator[str]:
     with open(fh, "r") as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
+            # remove any empty spaces in the control number
             yield row[0].replace(" ", "")
 
 
