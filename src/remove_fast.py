@@ -61,7 +61,7 @@ def remove_terms(terms_for_deletion: List[str], record: Record) -> None:
 
 
 if __name__ == "__main__":
-    fast_fh = "FAST-alien-terms.csv"
+    fast_fh = "..\\files\\fast4deletion.csv"
     marc_file = "..\\files\\bpl-aliens.mrc"
     terms_for_deletion = [term.lower() for term in csv2list(fast_fh)]
     with open(marc_file, "rb") as file:
