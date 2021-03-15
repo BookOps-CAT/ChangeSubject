@@ -63,7 +63,7 @@ def run(fh_in: str, fh_out: str, user: str) -> None:
 
 
 if __name__ == "__main__":
-    fh_in = "LCSHcontrolNos.csv"
-    fh_out = "LCauths.mrc"
+    fh_in = "../files/LCSHcontrolNos.csv"
+    fh_out = "../files/LCauths.mrc"
     user = ""  # enter here your email
     run(fh_in, fh_out, user)
