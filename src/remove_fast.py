@@ -9,7 +9,7 @@ from typing import List
 from pymarc import MARCReader, Record, Field
 
 
-from utils import csv2list
+from src.utils import csv2list
 
 
 def normalize_field(field: Field) -> str:
@@ -39,13 +39,13 @@ def fast4deletion(terms_for_deletion: List[str], record: Record) -> List[Field]:
     Returns:
             list of pymarc.Field objects
     """
-    fields_for_deletion = set()
+    fields_for_deletion = []
     fast_fields = fast_subjects(record.subjects())
     for field in fast_fields:
         norm_field = normalize_field(field)
         for term in terms_for_deletion:
-            if term in norm_field:
-                fields_for_deletion.add(field)
+            if term.lower() in norm_field:
+                fields_for_deletion.append(field)
     return fields_for_deletion
 
 
@@ -63,7 +63,7 @@ def remove_terms(terms_for_deletion: List[str], record: Record) -> None:
 if __name__ == "__main__":
     fast_fh = "..\\files\\fast4deletion.csv"
     marc_file = "..\\files\\bpl-aliens.mrc"
-    terms_for_deletion = [term.lower() for term in csv2list(fast_fh)]
+    terms_for_deletion = csv2list(fast_fh)
     with open(marc_file, "rb") as file:
         reader = MARCReader(file)
         n = 0
@@ -71,5 +71,3 @@ if __name__ == "__main__":
             n += 1
             print(f"analyzing record {n}")
             remove_terms(terms_for_deletion, record)
-            # print(record)
-            # print()
