@@ -2,7 +2,12 @@ import pytest
 from pymarc import Field, Record
 
 
-from src.remove_fast import normalize_field, fast_subjects, fast4deletion, remove_terms
+from src.remove_fast import (
+    normalize_field,
+    fast_subjects,
+    fast4deletion,
+    remove_fast_terms,
+)
 
 
 @pytest.mark.parametrize(
@@ -43,9 +48,9 @@ def test_fast4deletion(fake_fast_bib):
     ]
 
 
-def test_remove_terms(fake_fast_bib):
+def test_remove_fast_terms(fake_fast_bib):
     terms_for_deletion = ["Unwanted FAST"]
-    remove_terms(terms_for_deletion, fake_fast_bib)
+    remove_fast_terms(fake_fast_bib, terms_for_deletion)
     subjects = fake_fast_bib.subjects()
     assert [s.subfields for s in subjects] == [
         ["a", "LCSH sub A."],
