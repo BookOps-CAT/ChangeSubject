@@ -41,17 +41,17 @@ def test_fast_subjects(subfields, expectation):
     assert [f.subfields for f in fast_subjects(fields)] == expectation
 
 
-def test_fast4deletion(fake_fast_bib):
+def test_fast4deletion(stub_bib):
     terms_for_deletion = ["Unwanted FAST"]
-    [f.subfields for f in fast4deletion(terms_for_deletion, fake_fast_bib)] == [
+    [f.subfields for f in fast4deletion(terms_for_deletion, stub_bib)] == [
         ["a", "Unwanted FAST.", "2", "fast"]
     ]
 
 
-def test_remove_fast_terms(fake_fast_bib):
+def test_remove_fast_terms(stub_bib):
     terms_for_deletion = ["Unwanted FAST"]
-    remove_fast_terms(fake_fast_bib, terms_for_deletion)
-    subjects = fake_fast_bib.subjects()
+    remove_fast_terms(stub_bib, terms_for_deletion)
+    subjects = stub_bib.subjects()
     assert [s.subfields for s in subjects] == [
         ["a", "LCSH sub A."],
         ["a", "neutral FAST.", "2", "fast"],

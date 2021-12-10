@@ -22,7 +22,7 @@ def fake_subjects(fake_subfields):
 
 
 @pytest.fixture
-def fake_fast_bib():
+def stub_bib():
     record = Record()
     record.add_field(
         Field(tag="650", indicators=[" ", "0"], subfields=["a", "LCSH sub A."])
@@ -40,5 +40,8 @@ def fake_fast_bib():
             indicators=[" ", "7"],
             subfields=["a", "neutral FAST.", "2", "fast"],
         )
+    )
+    record.add_field(
+        Field(tag="907", indicators=[" ", " "], subfields=["a", ".b111111111"])
     )
     return record
